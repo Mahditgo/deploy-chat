@@ -3,6 +3,11 @@ import daisyui from "daisyui";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:5001', // آدرس بک‌اند شما
+    }
+  },
   theme: {
     extend: {},
   },
@@ -44,3 +49,4 @@ export default {
     ],
   },
 };
+
