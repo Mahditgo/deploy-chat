@@ -18,9 +18,16 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://89.42.199.75"], // آی‌پی سرور
     credentials: true,
   })
 );
@@ -31,12 +38,12 @@ app.use("/api/messages", messageRoutes);
 
 
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV == "production") {
   console.log('produc');
   
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("/", (req, res) => {
+  app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
